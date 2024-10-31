@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     onAddProduct = { viewModel.addProduct(it) },
                     onTogglePurchase = { viewModel.toggleProductPurchased(it) },
                     onDeleteProduct = { viewModel.deleteProduct(it) }
-                );
+                )
             }
         }
     }
