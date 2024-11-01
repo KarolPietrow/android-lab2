@@ -1,6 +1,7 @@
 package pl.karolpietrow.kp2
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
@@ -145,8 +147,30 @@ fun ProductRow(
     onPurchaseClick: () -> Unit,
     onDeleteClick: () -> Unit
 ) {
+    var showDeleteConfirmation by remember { mutableStateOf(false) }
+
+    if (showDeleteConfirmation) {
+        AlertDialog(
+             icon = { Icon(Icons.Default.Delete, contentDescription = "Delete icon") },
+
+            onDismissRequest = { showDeleteConfirmation = false},
+            confirmButton = {
+                Button(
+                    onClick = {
+                        onDeleteClick()
+                        showDeleteConfirmation = false
+                    }
+                ) { Text("Usuń")}
+            },
+            dismissButton = { Button(onClick = { showDeleteConfirmation = false }) { Text("Anuluj") } },
+            title = { Text("Potwierdzenie usunięcia") },
+            text = { Text("Czy na pewno chcesz usunąć produkt \"${product.name}\"?")}
+        )
+    }
+
     Row(
         modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
 //        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
@@ -165,7 +189,7 @@ fun ProductRow(
                 Icons.Default.Clear, "Purchase icon"
             )
         }
-        IconButton(onClick=onDeleteClick) {
+        IconButton(onClick = { showDeleteConfirmation=true }) {
             Icon(imageVector = Icons.Default.Delete, "Delete icon")
         }
     }
