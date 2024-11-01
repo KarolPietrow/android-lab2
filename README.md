@@ -1,0 +1,1 @@
+Stwórz listę zakupów. Lista powinna zawierać nazwy produktów (wpisywane dowolnie), ilość/liczbę opakowań oraz oznaczenie, czy dany produkt został kupiony. Aplikacja musi mieć możliwość odtworzenia zapisanej listy pomimo schowania się aplikacji w tło. Aplikacja musi mieć możliwość usuwania produktu z listy.
