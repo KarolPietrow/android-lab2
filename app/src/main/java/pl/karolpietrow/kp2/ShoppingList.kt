@@ -100,6 +100,11 @@ fun ShoppingList (
             onClick = { showDialog = true },
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
+            Icon(
+                Icons.Default.Add,
+                contentDescription = "Add icon",
+                modifier = Modifier.padding(end=8.dp)
+            )
             Text("Dodaj produkt")
         }
         Row(
@@ -181,7 +186,7 @@ fun ProductRow(
             text=product.quantity.toString(),
             modifier = Modifier.weight(1f)
         )
-        IconButton(onClick=onPurchaseClick) {
+        IconButton(onClick=onPurchaseClick,modifier = Modifier.weight(0.5f)) {
             Icon(imageVector =
             if (product.isPurchased)
                 Icons.Default.Done
@@ -189,7 +194,7 @@ fun ProductRow(
                 Icons.Default.Clear, "Purchase icon"
             )
         }
-        IconButton(onClick = { showDeleteConfirmation=true }) {
+        IconButton(onClick = { showDeleteConfirmation=true },modifier = Modifier.weight(0.5f)) {
             Icon(imageVector = Icons.Default.Delete, "Delete icon")
         }
     }
